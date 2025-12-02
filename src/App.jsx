@@ -13,8 +13,14 @@ const App = () => {
 
   // handleConvertCurrency
   const handleConvertCurrency = async () => {
+    setLoading(true);
+    setError(null);
     try {
-      currencyConverter(fromCurrency, toCurrency, amount);
+      const res = await currencyConverter(fromCurrency, toCurrency, amount);
+      const data = await res.data;
+      setLoading(false);
+      setConvertedAmount(0);
+      console.log(data);
     } catch (error) {
       setError("Error fetching conversion rate");
       console.log(error);
@@ -48,7 +54,7 @@ const App = () => {
                   <option value="USD">USD</option>
                   <option value="EUR">EUR</option>
                   <option value="INR">INR</option>
-                  <option value="NEP">NEP</option>
+                  <option value="NPR">NEP</option>
                   <option value="AUD">AUD</option>
                 </select>
               </label>
@@ -61,7 +67,7 @@ const App = () => {
                 value={toCurrency} 
                 setToCurrency={(e) => setToCurrency(e.target.value)}
                 >
-                  <option value="NEP">NEP</option>
+                  <option value="NPR">NEP</option>
                   <option value="USD">USD</option>
                   <option value="EUR">EUR</option>
                   <option value="INR">INR</option>
@@ -77,7 +83,7 @@ const App = () => {
           >
           {loading ? "Converting.." : "Convert"}
           </button>
-        </div>
+        
 
         <hr />
         {convertedAmount && (
@@ -89,6 +95,7 @@ const App = () => {
           </div>
         )}
         {error && <p>{error}</p>}
+        </div>
       </section>
   );
 };
