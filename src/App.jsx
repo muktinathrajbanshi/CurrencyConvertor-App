@@ -1,6 +1,14 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 const App = () => {
+
+  const [amount, setAmount] = useState(0);
+  const [fromCurrency, setFromCurrency] = useState("USD");
+  const [toCurrency, setToCurrency] = useState("NPR");
+  const [convertedAmount, setConvertedAmount] = useState(null);
+
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
 
   return (
       <section className="currency-converter">
@@ -41,7 +49,9 @@ const App = () => {
             </div>
           </div>
 
-          <button>{loading ? "Converting.." : "Convert"}</button>
+          <button disabled={loading || amount <= 0}>
+          {loading ? "Converting.." : "Convert"}
+          </button>
         </div>
       </section>
   );
