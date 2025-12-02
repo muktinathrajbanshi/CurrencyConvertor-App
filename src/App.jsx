@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { currencyConverter } from './api/postApi';
 
 const App = () => {
 
@@ -9,6 +10,16 @@ const App = () => {
 
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+
+  // handleConvertCurrency
+  const handleConvertCurrency = async () => {
+    try {
+      currencyConverter(fromCurrency, toCurrency, amount);
+    } catch (error) {
+      setError("Error fetching conversion rate");
+      console.log(error);
+    }
+  }
 
   return (
       <section className="currency-converter">
@@ -60,7 +71,10 @@ const App = () => {
             </div>
           </div>
 
-          <button disabled={loading || amount <= 0}>
+          <button 
+          disabled={loading || amount <= 0} 
+          onClick={handleConvertCurrency}
+          >
           {loading ? "Converting.." : "Convert"}
           </button>
         </div>
@@ -74,6 +88,7 @@ const App = () => {
             </h2>
           </div>
         )}
+        {error && <p>{error}</p>}
       </section>
   );
 };
