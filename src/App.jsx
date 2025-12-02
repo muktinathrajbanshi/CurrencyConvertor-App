@@ -17,7 +17,12 @@ const App = () => {
           <div>
             <label htmlFor="currency_amount">
             Amount:
-            <input type="number" id="currency_amount" />
+            <input 
+            type="number" 
+            id="currency_amount" 
+            value={amount}
+            onChange={(e) => setAmount(e.target.value)}
+            />
             </label>
           </div>
 
@@ -25,7 +30,10 @@ const App = () => {
             <div>
               <label htmlFor="">
                 From:
-                <select>
+                <select 
+                value={fromCurrency} 
+                setFromCurrency={(e) => setFromCurrency(e.target.value)}
+                >
                   <option value="USD">USD</option>
                   <option value="EUR">EUR</option>
                   <option value="INR">INR</option>
@@ -38,7 +46,10 @@ const App = () => {
             <div>
               <label htmlFor="">
                 To:
-                <select>
+                <select 
+                value={toCurrency} 
+                setToCurrency={(e) => setToCurrency(e.target.value)}
+                >
                   <option value="NEP">NEP</option>
                   <option value="USD">USD</option>
                   <option value="EUR">EUR</option>
@@ -53,6 +64,16 @@ const App = () => {
           {loading ? "Converting.." : "Convert"}
           </button>
         </div>
+
+        <hr />
+        {convertedAmount && (
+          <div>
+            <h2>
+              {amount} {fromCurrency} = {convertedAmount.toFixed(2)}
+              {toCurrency}
+            </h2>
+          </div>
+        )}
       </section>
   );
 };
