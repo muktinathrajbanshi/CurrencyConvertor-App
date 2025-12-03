@@ -49,7 +49,7 @@ const App = () => {
                 From:
                 <select 
                 value={fromCurrency} 
-                setFromCurrency={(e) => setFromCurrency(e.target.value)}
+                onChange={(e) => setFromCurrency(e.target.value)}
                 >
                   <option value="USD">USD</option>
                   <option value="EUR">EUR</option>
@@ -65,7 +65,7 @@ const App = () => {
                 To:
                 <select 
                 value={toCurrency} 
-                setToCurrency={(e) => setToCurrency(e.target.value)}
+                onChange={(e) => setToCurrency(e.target.value)}
                 >
                   <option value="NPR">NEP</option>
                   <option value="USD">USD</option>
