@@ -17,10 +17,10 @@ const App = () => {
     setError(null);
     try {
       const res = await currencyConverter(fromCurrency, toCurrency, amount);
-      const data = await res.data;
+      const {conversion_result} = await res.data;
       setLoading(false);
-      setConvertedAmount(0);
-      console.log(data);
+      setConvertedAmount(conversion_result);
+      // console.log(data);
     } catch (error) {
       setError("Error fetching conversion rate");
       console.log(error);
